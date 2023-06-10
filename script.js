@@ -3,7 +3,8 @@ let ko=new Audio("./music/ko.mp3");
 let press= new Audio("./music/press.mp3");
 let turn='X';
 var gameover=false;
-
+// check for draw
+var pressed=0;
 //change turn of player
 const change=() =>{
     if(turn==='X'){
@@ -15,7 +16,6 @@ const change=() =>{
 }
 
 //Check win
-music.play();
 const iswin =() =>{
     // getting all grids to check
     let boxes=document.getElementsByClassName('boxtext');
@@ -34,13 +34,13 @@ const iswin =() =>{
             document.querySelector('.info').innerHTML=turn+" wins";
             ko.play();
             gameover=true;
+            pressed=0;
         }
     })
 }
 
 
-// DOM work
-
+// Logic
 // all 9 box
 let boxes=document.getElementsByClassName('box');
 // getting every ele
@@ -49,15 +49,21 @@ Array.from(boxes).forEach(ele=>{
     let txt=ele.querySelector('.boxtext');
     // Adding Event listner of click
     ele.addEventListener('click',()=>{
-        if(txt.innerHTML===""){
-            txt.innerHTML=turn;
-            press.play();
-            iswin();
-            change();
-            //change the turn for in page
-            if(!gameover){
-                let msg=document.getElementsByClassName('info');
-                msg[0].innerHTML="Turn for "+turn;
+        if(!gameover){
+            if(txt.innerHTML===""){
+                txt.innerHTML=turn;
+                press.play();
+                iswin();
+                change();
+                //change the turn for in page
+                if(!gameover){
+                    let msg=document.getElementsByClassName('info');
+                    msg[0].innerHTML="Turn for "+turn;
+                }
+                pressed++;
+                if(pressed===9){
+                    document.querySelector('.info').innerHTML="Draw ";
+                }
             }
         }
     })
@@ -70,7 +76,12 @@ reset.addEventListener('click', ()=>{
     })
     turn='X';
     let msg=document.getElementsByClassName('info');
-        msg[0].innerHTML="Turn for "+turn;
-        gameover=false;
+    msg[0].innerHTML="Turn for "+turn;
+    gameover=false;
+    pressed=0;
 })
 
+document.addEventListener('click',function(){
+    music.play();
+    this.documentElement.removeEventListener('click',this);
+});

@@ -4,6 +4,7 @@
 }
 
 body {
+    position: relative;
     background-image: url(./img/tictacpic.webp);
 }
 
@@ -47,34 +48,35 @@ nav h1 {
 
 .para {
     width: 629px;
-    position: relative;
-    padding-left: 479px;
-    line-height: 49px;
-    padding-top: 20px;
+    position: absolute;
+    left: 30%;
+    /* padding-left: 479px; */
+    line-height: 40px;
+    /* padding-top: 20px; */
     font-size: 30px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(18, 255, 216);
 }
 
-.violet1 a {
+.TTT {
     font-family: cursive;
     color: rgb(251, 255, 0);
     text-decoration: none;
 }
 
-.violet1 a:hover {
+.TTT:hover {
     color: rgb(255, 149, 0);
 }
 
-.violet {
+.XO {
     color: rgb(255, 0, 0);
 }
 
-.red {
+.win {
     font-size: 2rem;
     color: rgb(234, 255, 0);
 }
 
-.red:hover {
+.win:hover {
     color: rgb(245, 126, 0);
 }
